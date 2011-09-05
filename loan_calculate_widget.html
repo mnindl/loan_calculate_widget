@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta name="description" content="Finanzierungsrechner" />
+  <meta name="keywords" content="Finanzierungsrechner" />
+  <meta name="author" content="Michael Nindl for Immoscout24" />
+  <meta charset="UTF-8" />
+  <link href="css/reset_min.css" type="text/css" rel="stylesheet"/>
+  <link href="css/jquery-ui-1.8.11.custom.css" type="text/css" rel="stylesheet"/>
+  <link href="css/loan_calculate_widget.css" type="text/css" rel="stylesheet"/>
+<title>Finanzrechner</title>
+</head>
+<body id="loan_calculate_widget_body">
+  <div id="loan_calculate_widget">
+    <h1>Finanzierungsrechner</h1>
+    <p class="slider_label">Kaufpreis</p>
+    <div class="slider_box buy_price_slider">
+      <div class="slider slider_buy_price">&nbsp;</div>
+    </div>
+    <p class="slider_label">Eigenkapital</p>
+    <div class="slider_box own_capital_slider">
+      <div class="slider slider_own_capital">&nbsp;</div>
+    </div>
+    <div id="finance_example">
+      <h2>Finanzierungsbeispiel</h2>
+      <div class="compute_data">
+        <p>Darlehen</p>
+        <p class="value" id="loan_value">&nbsp;</p>
+      </div>
+      <div class="compute_data">
+        <p>Monatliche Rate</p>
+        <p class="value" id="monthly_value">&nbsp;</p>
+      </div>
+    </div>
+    <div id="links">
+      <a href="http://www.immobilienscout24.de/de/baufinanzierung/baufinanzierungsrechner/annahmen.jsp" target="_blank">
+        Annahmen
+      </a>
+      <div class="submit">
+        <a id="submit">
+          <span>Angebot anfordern</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <script src="http://www.google.com/jsapi"></script>
+  <script src="js/loan_calculate_widget.js"></script>
+</body>
+
+</html> 
