@@ -53,8 +53,8 @@ LOANCALCULATEWIDGET.compute = (function () {
   function getDebitInterest(loan_sum, loan_ratio) {
     var loan_key,
         ratio_key;
-    console.log("loan_sum= "+loan_sum);
-    console.log("loan_ratio= "+loan_ratio);
+  /*  console.log("loan_sum= "+loan_sum);
+    console.log("loan_ratio= "+loan_ratio);*/
     if (loan_sum < 100000) {
       loan_key = "0";
     } else if (loan_sum >= 100000 && loan_sum < 200000) {
@@ -73,15 +73,15 @@ LOANCALCULATEWIDGET.compute = (function () {
     } else {
       ratio_key ="100";
     }
-    console.log(loan_key);
+  /*  console.log(loan_key);
     console.log(ratio_key);
-    console.log(calc_data_json[loan_key][ratio_key]);
+    console.log(calc_data_json[loan_key][ratio_key]);*/
     return parseFloat(calc_data_json[loan_key][ratio_key].replace(/\,/, "."));
     
   }
   function calcLoan() {
-    var buy_price = Number($('.buy_price_slider .ui-slider-handle').html().replace(/\./, "")),
-       own_capital = Number($('.own_capital_slider .ui-slider-handle').html().replace(/\./, "")),
+    var buy_price = Number($('#buy_price_slider .ui-slider-handle').html().replace(/\./, "")),
+       own_capital = Number($('#own_capital_slider .ui-slider-handle').html().replace(/\./, "")),
        loan_sum = buy_price-own_capital,
        loan_ratio = ((loan_sum/buy_price).toFixed(2))*100,
        debit_interest = getDebitInterest(loan_sum, loan_ratio);
@@ -103,19 +103,19 @@ LOANCALCULATEWIDGET.compute = (function () {
       max: 900000,
       step: 10000,
       create: function (e, ui) {
-        $('.buy_price_slider .ui-slider-handle').text('50.000');
+        $('#buy_price_slider .ui-slider-handle').text('50.000');
       },
       slide: function (e, ui) {
         var own_capital_value =  $(".slider_own_capital").slider('value');
-        $('.buy_price_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
+        $('#buy_price_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
         if (own_capital_value > ui.value) {
-          $('.own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
+          $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
         }
         calcLoan();
       },
       change: function (e, ui) {
         var own_capital_value =  $(".slider_own_capital").slider('value');
-        $('.buy_price_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
+        $('#buy_price_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
         calcLoan();
       } 
     },
@@ -124,21 +124,21 @@ LOANCALCULATEWIDGET.compute = (function () {
         max: 500000,
         step: 10000,
         create: function (e, ui) {
-          $('.own_capital_slider .ui-slider-handle').text('10.000');
+          $('#own_capital_slider .ui-slider-handle').text('10.000');
         },
         slide: function (e, ui) {
           var buy_price_value =  $(".slider_buy_price").slider('value');
-          $('.own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
+          $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
           if (buy_price_value <= ui.value) {
-            $('.own_capital_slider .ui-slider-handle').text(getFormatPrice(buy_price_value, false));
+            $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(buy_price_value, false));
           }
           calcLoan();
         },
         change: function (e, ui) {
           var buy_price_value =  $(".slider_buy_price").slider('value');
-          $('.own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
+          $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
           if (buy_price_value <= ui.value) {
-            $('.own_capital_slider .ui-slider-handle').text(getFormatPrice(buy_price_value, false));
+            $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(buy_price_value, false));
           }
           calcLoan();
         } 
