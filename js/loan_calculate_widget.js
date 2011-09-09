@@ -8,31 +8,31 @@ if (!window.LOANCALCULATEWIDGET) { var LOANCALCULATEWIDGET = {}; }
 
 LOANCALCULATEWIDGET.compute = (function () {
   var calc_data_json = {
-  "0" : {
-      "50" : "0,0359",
-      "60" : "0,0359",
-      "80" : "0,0359",
-      "100": "0,039",
-  },
-  "100000" : {
-      "50" : "0,0358",
-      "60" : "0,0359",
-      "80" : "0,0359",
-      "100": "0,039",
-  },
-  "200000" : {
-      "50" : "0,0335",
-      "60" : "0,0335",
-      "80" : "0,0359",
-      "100": "0,039",
-  },
-  "300000" : {
-      "50" : "0,0335",
-      "60" : "0,0335",
-      "80" : "0,0359",
-      "100": "0,039"
-  }
-};
+    "0" : {
+        "50" : "0,0359",
+        "60" : "0,0359",
+        "80" : "0,0359",
+        "100": "0,039"
+    },
+    "100000" : {
+        "50" : "0,0358",
+        "60" : "0,0359",
+        "80" : "0,0359",
+        "100": "0,039"
+    },
+    "200000" : {
+        "50" : "0,0335",
+        "60" : "0,0335",
+        "80" : "0,0359",
+        "100": "0,039"
+    },
+    "300000" : {
+        "50" : "0,0335",
+        "60" : "0,0335",
+        "80" : "0,0359",
+        "100": "0,039"
+    }
+  };
 
   function getFormatPrice(price, euro_sign) {
     var temp;
@@ -53,8 +53,6 @@ LOANCALCULATEWIDGET.compute = (function () {
   function getDebitInterest(loan_sum, loan_ratio) {
     var loan_key,
         ratio_key;
-  /*  console.log("loan_sum= "+loan_sum);
-    console.log("loan_ratio= "+loan_ratio);*/
     if (loan_sum < 100000) {
       loan_key = "0";
     } else if (loan_sum >= 100000 && loan_sum < 200000) {
@@ -73,38 +71,23 @@ LOANCALCULATEWIDGET.compute = (function () {
     } else {
       ratio_key ="100";
     }
-  /*  console.log(loan_key);
-    console.log(ratio_key);
-    console.log(calc_data_json[loan_key][ratio_key]);*/
     return parseFloat(calc_data_json[loan_key][ratio_key].replace(/\,/, "."));
-    
   }
   function calcLoan() {
-   var buy_price = $('#buy_price_slider .ui-slider-handle').html().replace(/\./, ""),
-       own_capital = $('#own_capital_slider .ui-slider-handle').html().replace(/\./, ""),
-       buy_price_num = Number(buy_price.slice(0, buy_price.length-1)),
-       own_capital_num = Number(own_capital.slice(0, own_capital.length-1)),
-       loan_sum = buy_price_num-own_capital_num,
-       loan_ratio = ((loan_sum/buy_price_num).toFixed(2))*100,
-       debit_interest = getDebitInterest(loan_sum, loan_ratio);
-       /*console.log(loan_sum * ((debit_interest +0.01)/12));
-       console.log($('#buy_price_slider .ui-slider-handle').html());*/
-       monthly_rate = (loan_sum * ((debit_interest + 0.01)/12)).toFixed(0);
-       /*console.log("buy_price_num= "+buy_price_num);
-       console.log("own_capital_num= "+own_capital_num);
-       console.log("monthly_rate= "+monthly_rate);*/
+    var buy_price = $('#buy_price_slider .ui-slider-handle').html().replace(/\./, ""),
+        own_capital = $('#own_capital_slider .ui-slider-handle').html().replace(/\./, ""),
+        buy_price_num = Number(buy_price.slice(0, buy_price.length-1)),
+        own_capital_num = Number(own_capital.slice(0, own_capital.length-1)),
+        loan_sum = buy_price_num-own_capital_num,
+        loan_ratio = ((loan_sum/buy_price_num).toFixed(2))*100,
+        debit_interest = getDebitInterest(loan_sum, loan_ratio);
+        monthly_rate = (loan_sum * ((debit_interest + 0.01)/12)).toFixed(0);
     $('#loan_value').html(getFormatPrice(loan_sum, true));
     $('#monthly_value').html(getFormatPrice(monthly_rate, true));
-     /*  console.log(buy_price+"  "+own_capital+" "),
-       console.log(calc_data_json['50000']);
-       console.log("Darlehenssumme: "+loan_sum);*/
-       /*console.log("Monatliche Rate: "+buy_price-own_capital);
-       230.000 x (0,0359 + 0,01) / 12 = 880*/ 
   }
   function setSliderValues(slider, ui) {
     var own_capital_value = $(".slider_own_capital").slider('value');
     var buy_price_value =  $(".slider_buy_price").slider('value');
-    console.log(ui);
     if (slider === "buy_price") {
       if (own_capital_value >= ui.value) {
         $('#own_capital_slider .ui-slider-handle').html(getFormatPrice(ui.value, true));
@@ -120,7 +103,6 @@ LOANCALCULATEWIDGET.compute = (function () {
         $('#own_capital_slider .ui-slider-handle').html(getFormatPrice(ui.value, true));
       }
     }
-
   }
   function initSlider() {
     // set sliders

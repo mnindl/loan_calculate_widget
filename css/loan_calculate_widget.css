@@ -61,6 +61,9 @@
   left: 118px;
   top: -7px;
 }
+*+html #loan_calculate_widget .slider_box .right {
+  display: none;
+}
 #loan_calculate_widget #sliders .slider {
   background-color: #97ACC1;
   border-color: #97ACC1;
@@ -77,10 +80,10 @@
   -moz-border-radius: 4px 4px;
 }
 #loan_calculate_widget #sliders .slider .ui-slider-handle {
-  height: 18px;
+  height: 21px;
+  line-height: 19px;
   font-size: 11px;
   display: block;
-  padding-top: 2px;
   width: 90px;
   text-align: center;
   background-color: #ffffff;
@@ -90,6 +93,10 @@
   margin-left: -50px;
   cursor: pointer;
   background: url(../img/slider.png) no-repeat scroll  #ffffff;
+  border: none;
+}
+#loan_calculate_widget #sliders .slider .ui-slider-handle:hover {
+  border: none;
 }
 #loan_calculate_widget #finance_example {
   margin: 0 8px 8px 8px;
