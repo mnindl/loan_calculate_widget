@@ -1,4 +1,5 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='de' xml:lang='de' xmlns='http://www.w3.org/1999/xhtml'>
 <html>
 <head>
   <meta name="description" content="Finanzierungsrechner" />
@@ -13,14 +14,19 @@
 <body id="loan_calculate_widget_body">
   <div id="loan_calculate_widget">
     <h1>Finanzierungsrechner</h1>
+    <i class="border_holder border_holder_top">&nbsp;</i>
     <div id="sliders">
       <p class="slider_label">Kaufpreis</p>
       <div class="slider_box" id="buy_price_slider">
-        <div class="slider slider_buy_price">&nbsp;</div>
+        <span class="left">&nbsp;</span>
+        <div class="slider slider_buy_price"></div>
+        <span class="right">&nbsp;</span>
       </div>
       <p class="slider_label">Eigenkapital</p>
       <div class="slider_box" id="own_capital_slider">
-        <div class="slider slider_own_capital">&nbsp;</div>
+        <span class="left">&nbsp;</span>
+        <div class="slider slider_own_capital"></div>
+        <span class="right">&nbsp;</span>
       </div>
     </div>
     <div id="finance_example">
@@ -34,12 +40,13 @@
         <p class="value" id="monthly_value">&nbsp;</p>
       </div>
     </div>
+    <i class="border_holder">&nbsp;</i>
     <div id="links">
-      <a href="http://www.immobilienscout24.de/de/baufinanzierung/baufinanzierungsrechner/annahmen.jsp" target="_blank">
+      <a id="assumpt" href="http://www.immobilienscout24.de/de/baufinanzierung/baufinanzierungsrechner/annahmen.jsp" target="_blank">
         Annahmen
       </a>
       <div class="submit">
-        <a id="submit">
+        <a href="http://www.immobilienscout24.de/de/finanzen/kaufplaner/berechnen/index.jsp?ns_campaign=10-00394&icmp=10-00394&ns_channel=internal&ns_source=sky&ns_linkname=teaser-content" id="submit">
           <span>Angebot anfordern</span>
         </a>
       </div>

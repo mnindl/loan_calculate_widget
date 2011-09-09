@@ -80,21 +80,47 @@ LOANCALCULATEWIDGET.compute = (function () {
     
   }
   function calcLoan() {
-    var buy_price = Number($('#buy_price_slider .ui-slider-handle').html().replace(/\./, "")),
-       own_capital = Number($('#own_capital_slider .ui-slider-handle').html().replace(/\./, "")),
-       loan_sum = buy_price-own_capital,
-       loan_ratio = ((loan_sum/buy_price).toFixed(2))*100,
+   var buy_price = $('#buy_price_slider .ui-slider-handle').html().replace(/\./, ""),
+       own_capital = $('#own_capital_slider .ui-slider-handle').html().replace(/\./, ""),
+       buy_price_num = Number(buy_price.slice(0, buy_price.length-1)),
+       own_capital_num = Number(own_capital.slice(0, own_capital.length-1)),
+       loan_sum = buy_price_num-own_capital_num,
+       loan_ratio = ((loan_sum/buy_price_num).toFixed(2))*100,
        debit_interest = getDebitInterest(loan_sum, loan_ratio);
-       //console.log(loan_sum * ((debit_interest +0.01)/12));
+       /*console.log(loan_sum * ((debit_interest +0.01)/12));
+       console.log($('#buy_price_slider .ui-slider-handle').html());*/
        monthly_rate = (loan_sum * ((debit_interest + 0.01)/12)).toFixed(0);
-       //console.log("monthly_rate= "+monthly_rate);
-    $('#loan_value').text(loan_sum);
-    $('#monthly_value').text(monthly_rate);
+       /*console.log("buy_price_num= "+buy_price_num);
+       console.log("own_capital_num= "+own_capital_num);
+       console.log("monthly_rate= "+monthly_rate);*/
+    $('#loan_value').html(getFormatPrice(loan_sum, true));
+    $('#monthly_value').html(getFormatPrice(monthly_rate, true));
      /*  console.log(buy_price+"  "+own_capital+" "),
        console.log(calc_data_json['50000']);
        console.log("Darlehenssumme: "+loan_sum);*/
        /*console.log("Monatliche Rate: "+buy_price-own_capital);
        230.000 x (0,0359 + 0,01) / 12 = 880*/ 
+  }
+  function setSliderValues(slider, ui) {
+    var own_capital_value = $(".slider_own_capital").slider('value');
+    var buy_price_value =  $(".slider_buy_price").slider('value');
+    console.log(ui);
+    if (slider === "buy_price") {
+      if (own_capital_value >= ui.value) {
+        $('#own_capital_slider .ui-slider-handle').html(getFormatPrice(ui.value, true));
+        $('#buy_price_slider .ui-slider-handle').html(getFormatPrice(ui.value, true));
+      } else {
+        $('#buy_price_slider .ui-slider-handle').html(getFormatPrice(ui.value, true));
+      }
+    }
+    if (slider === "own_capital") {
+      if (buy_price_value <= ui.value) {
+        $('#own_capital_slider .ui-slider-handle').html(getFormatPrice(buy_price_value, true));
+      } else {
+        $('#own_capital_slider .ui-slider-handle').html(getFormatPrice(ui.value, true));
+      }
+    }
+
   }
   function initSlider() {
     // set sliders
@@ -102,20 +128,17 @@ LOANCALCULATEWIDGET.compute = (function () {
       min: 50000,
       max: 900000,
       step: 10000,
+      range: "max",
+      animate: 2000,
       create: function (e, ui) {
-        $('#buy_price_slider .ui-slider-handle').text('50.000');
+        $('#buy_price_slider .ui-slider-handle').html(getFormatPrice('50000', true));
       },
       slide: function (e, ui) {
-        var own_capital_value =  $(".slider_own_capital").slider('value');
-        $('#buy_price_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
-        if (own_capital_value > ui.value) {
-          $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
-        }
+        setSliderValues("buy_price", ui);
         calcLoan();
       },
       change: function (e, ui) {
-        var own_capital_value =  $(".slider_own_capital").slider('value');
-        $('#buy_price_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
+        setSliderValues("buy_price", ui);
         calcLoan();
       } 
     },
@@ -123,28 +146,26 @@ LOANCALCULATEWIDGET.compute = (function () {
         min: 10000,
         max: 500000,
         step: 10000,
+        range: "max",
+        animate: 2000,
         create: function (e, ui) {
-          $('#own_capital_slider .ui-slider-handle').text('10.000');
+          $('#own_capital_slider .ui-slider-handle').html(getFormatPrice('10000', true));
         },
         slide: function (e, ui) {
-          var buy_price_value =  $(".slider_buy_price").slider('value');
-          $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
-          if (buy_price_value <= ui.value) {
-            $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(buy_price_value, false));
-          }
+          setSliderValues("own_capital", ui);
           calcLoan();
         },
         change: function (e, ui) {
-          var buy_price_value =  $(".slider_buy_price").slider('value');
-          $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(ui.value, false));
-          if (buy_price_value <= ui.value) {
-            $('#own_capital_slider .ui-slider-handle').text(getFormatPrice(buy_price_value, false));
-          }
+          setSliderValues("own_capital", ui);
           calcLoan();
-        } 
+        }
       };
       $(".slider_buy_price").slider(slider_opt_buy_price);
       $(".slider_own_capital").slider(slider_opt_own_capital);
+      $('#sliders').css('visibility', 'visible');
+      $('.slider_buy_price .ui-slider-handle').focus();
+      $(".slider_buy_price").slider("value", 640000);
+      $(".slider_own_capital").slider("value", 210000);
   }
   function init() {
     initSlider();
