@@ -111,6 +111,10 @@
   float: left;
   width: 50%;
 }
+#loan_calculate_widget #finance_example .monthly_rate p {
+  text-align: right;
+  margin-right: 30px;
+}
 #loan_calculate_widget #finance_example .compute_data .value {
   font-size: 22px;
   color: #335d86;
