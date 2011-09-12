@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta name="description" content="Finanzierungsrechner" />
+  <meta name="keywords" content="Finanzierungsrechner" />
+  <meta name="author" content="Michael Nindl for Immoscout24" />
+  <meta charset="UTF-8" />
+  <link href="css/reset_min.css" type="text/css" rel="stylesheet"/>
+  <link href="css/jquery-ui-1.8.11.custom.css" type="text/css" rel="stylesheet"/>
+  <link href="css/loan_calculate_widget_2.css" type="text/css" rel="stylesheet"/>
+<title>Finanzrechner</title>
+</head>
+<body id="loan_calculate_widget_body">
+  <div id="loan_calculate_widget">
+    <div id="sliders">
+      <h1>Finanzierungsrechner</h1>
+      <p class="slider_label">Kaufpreis</p>
+      <div class="slider_box" id="buy_price_slider">
+        <span class="left">&nbsp;</span>
+        <div class="slider slider_buy_price"></div>
+        <span class="right">&nbsp;</span>
+      </div>
+      <div class="clear">&nbsp;</div>
+      <p class="slider_label" id="slider_label_own_capital">Eigenkapital</p>
+      <div class="slider_box" id="own_capital_slider">
+        <span class="left">&nbsp;</span>
+        <div class="slider slider_own_capital"></div>
+        <span class="right">&nbsp;</span>
+      </div>
+      <div class="clear">&nbsp;</div>
+      <p class="slider_label" id="loan_label" >Darlehen</p>
+      <p class="slider_label" id="loan_value">&nbsp;</p>
+      <a id="assumpt" href="http://www.immobilienscout24.de/de/baufinanzierung/baufinanzierungsrechner/annahmen.jsp" target="_blank">
+        Annahmen
+      </a>
+      <div class="clear">&nbsp;</div>
+    </div>
+    <div id="finance_example">
+      <div class="monthly_rate">
+        <p>Monatliche Rate</p>
+        <p id="monthly_value">&nbsp;</p>
+      </div>
+      <div class="submit">
+        <a href="http://www.immobilienscout24.de/de/finanzen/kaufplaner/berechnen/index.jsp?ns_campaign=10-00394&icmp=10-00394&ns_channel=internal&ns_source=sky&ns_linkname=teaser-content" id="submit">
+          <span>Angebot anfordern</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <script src="http://www.google.com/jsapi"></script>
+  <script src="js/loan_calculate_widget.min.js"></script>
+</body>
+
+</html> 
